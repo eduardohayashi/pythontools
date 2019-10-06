@@ -5,7 +5,12 @@ Python Development tools
 
 ### verbose( -v, --verbose )
 Print smart, multilevel logs (-vv, -vvv, -vvvv)
-
+```
+verbose('running bla method','Process:', v, type='INFO')
+verbose('Something strange here, but its ok', type='WARN')
+verbose('I\'m a -vv INFO text', level=2, type='INFO')
+verbose('I\'m a -vvv WARN text', level=3, type='WARN')
+```
 ![Screenshot from 2019-10-05 23-40-15](https://user-images.githubusercontent.com/3841825/66261712-5e1ed600-e7ca-11e9-9e44-9dbf32eea402.png)
 
 ### Debug model (-d, --debug)
@@ -15,6 +20,7 @@ Print PID, module and method called
 Print time measure
 
 ![Screenshot from 2019-10-05 23-46-12](https://user-images.githubusercontent.com/3841825/66261713-5e1ed600-e7ca-11e9-86d4-228c19a5e909.png)
+**[TYPE][DATE][PID][MODULE][METHOD][TIMER]** Message log
 
 ### CLI options
 Automatically add option in argparse() to overwrite your app settings
