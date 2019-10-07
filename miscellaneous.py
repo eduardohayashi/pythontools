@@ -1,4 +1,5 @@
 import os
+import re
 import fnmatch
 from glob import glob
 from random import randint
@@ -83,3 +84,15 @@ def find_files(localpath, recursive=False, **kwargs):
         files += new_files
 
     return list(set(files))
+
+
+def replace_many(text: str, adict: dict):
+    '''
+
+    :param text:
+    :param adict:
+    :return:
+    '''
+
+    regex = re.compile("|".join(map(re.escape, adict.keys())))
+    return regex.sub(lambda match: adict[match.group(0)], text)
