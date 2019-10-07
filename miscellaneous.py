@@ -1,5 +1,8 @@
 import os
 import re
+import gzip
+import tarfile
+import zipfile
 import fnmatch
 from glob import glob
 from random import randint
@@ -96,3 +99,41 @@ def replace_many(text: str, adict: dict):
 
     regex = re.compile("|".join(map(re.escape, adict.keys())))
     return regex.sub(lambda match: adict[match.group(0)], text)
+
+
+def decompress(filepath: str, outpath=None):
+    '''
+
+    :param filepath:
+    :param outputpath:
+    :return:
+    '''
+
+    repl_func = lambda text: replace_many(text, {'.tar.gz': '', '.lzma': '', '.gz': '', '.zip': '', '.tar': ''})
+
+    if outpath is None:
+        func = lambda item: os.path.join('/'.join(filepath.split('/')[:-1]), repl_func(filepath.split('/')[-1]))
+    else:
+        func = lambda item: os.path.join(outpath, repl_func(filepath.split('/')[-1])) if outpath.endswith(
+            '/') else outpath
+
+    if filepath.endswith("tar.gz") or filepath.endswith("tar") or filepath.endswith("gz") or filepath.endswith("lzma"):
+        try:
+            with tarfile.open(filepath, "r:*") as tar:
+                _path = repl_func(outpath)
+                tar.extractall(path=_path)
+        except tarfile.ReadError:
+            if filepath.endswith("gz"):
+                with gzip.open(filepath, 'rb') as gzip_ref:
+                    _path = func('.gz')
+                    with open(_path, 'wb') as nfile:
+                        nfile.write(gzip_ref.read())
+
+    elif filepath.endswith("zip"):
+        with zipfile.ZipFile(filepath) as zip_ref:
+            _path = func('.zip')
+            zip_ref.extractall(path=_path)
+    else:
+        raise Exception(f'Unrecognized extension: {filepath}')
+
+    return _path
