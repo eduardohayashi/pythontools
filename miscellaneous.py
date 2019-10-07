@@ -1,6 +1,7 @@
 import os
 import re
 import gzip
+import types
 import tarfile
 import zipfile
 import fnmatch
@@ -15,14 +16,18 @@ def pool_filter(pool, func, candidates):
 
     :param pool:
     :param func:
+    :type func: types.FunctionType
     :param candidates:
     :return:
     '''
 
+    if not isinstance(func, types.FunctionType):
+        raise Exception('Function not defined')
+
     return [c for c, keep in zip(candidates, pool.map(func, candidates)) if keep]
 
 
-def set_tags(text, **kwargs):
+def set_tags(text: str, **kwargs):
     '''
 
     :param text:
@@ -40,7 +45,7 @@ def set_tags(text, **kwargs):
     return str(text).format(**tags)
 
 
-def __recursive_file_search(directory):
+def __recursive_file_search(directory: str):
     '''
 
     :param directory:
@@ -56,10 +61,11 @@ def __recursive_file_search(directory):
                 yield filename
 
 
-def find_files(localpath, recursive=False, **kwargs):
+def find_files(localpath, recursive: bool = False, **kwargs):
     '''
 
     :param localpath:
+    :type localpath: list or str
     :param recursive:
     :param kwargs:
     :return:
@@ -101,11 +107,11 @@ def replace_many(text: str, adict: dict):
     return regex.sub(lambda match: adict[match.group(0)], text)
 
 
-def decompress(filepath: str, outpath=None):
+def decompress(filepath: str, outpath: str = None):
     '''
 
     :param filepath:
-    :param outputpath:
+    :param outpath:
     :return:
     '''
 
