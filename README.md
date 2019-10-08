@@ -52,3 +52,15 @@ Import code inside your applications:
 ```
 from pythontools import *
 ```
+
+## Miscellaneous
+
+```
+import multiprocessing
+
+from miscellaneous import pool_filter
+
+with multiprocessing.Pool(multiprocessing.cpu_count() * 2 + 1) as ppool:
+    array = [{'key': 1, 'value': 4}, {'key': 2, 'value': 5}, {'key': 3, 'value': 6}, ]
+    array = pool_filter(pool=ppool, func=lambda i: i['key'] >=2, candidates=array)
+```
