@@ -4,6 +4,7 @@ import concurrent.futures
 from pythontools.argparse import *
 from pythontools.verbose import *
 from pythontools.miscellaneous import *
+import settings
 
 def bla(v=1):
     verbose('running bla method','Process:', v, label='INFO')
@@ -29,6 +30,7 @@ bla()
 blabla()
 verbose('I\'m a -vv INFO text', level=2, label='INFO')
 verbose('I\'m a -vvv WARN text', level=3, label='WARN')
+verbose('my_config2:', settings.my_config2, level=1, label='INFO')
 blablabla()
 runsleep()
 

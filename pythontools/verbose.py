@@ -12,7 +12,7 @@ import os
 import sys
 import random
 import argparse
-from pythontools import settings
+import settings
 from datetime import datetime
 from timeit import default_timer as timer
 
