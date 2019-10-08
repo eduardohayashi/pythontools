@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 import time
 import concurrent.futures
-from pythontools import *
+from pythontools.argparse import *
+from pythontools.verbose import *
+from pythontools.miscellaneous import *
 
 def bla(v=1):
     verbose('running bla method','Process:', v, label='INFO')
