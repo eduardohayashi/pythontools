@@ -69,7 +69,7 @@ class bcolors:
     ERROR = '\033[91m'
     ENDC = '\033[0m'
 
-def verbose(*args, level=1, type='INFO', **kwargs):
+def verbose(*args, level=1, label='INFO', **kwargs):
     pid, time_measure, dt, source, module, method = '','','','','',''
     try:
         if settings.verbose >= level:
@@ -81,10 +81,10 @@ def verbose(*args, level=1, type='INFO', **kwargs):
                 pass
 
             try:
-                type = getattr(bcolors, type)+f'[{type}]'+bcolors.ENDC
+                label = getattr(bcolors, label)+f'[{label}]'+bcolors.ENDC
 
             except:
-                type = f'[{type}]'
+                label = f'[{label}]'
 
             try:
                 if settings.debug:
@@ -98,7 +98,7 @@ def verbose(*args, level=1, type='INFO', **kwargs):
             except:
                 pass
 
-            print(f'{type}{dt}{pid}{module}{method}{time_measure}', *args)
+            print(f'{label}{dt}{pid}{module}{method}{time_measure}', *args)
 
     except:
         pass

@@ -4,29 +4,29 @@ import concurrent.futures
 from pythontools import *
 
 def bla(v=1):
-    verbose('running bla method','Process:', v, type='INFO')
+    verbose('running bla method','Process:', v, label='INFO')
 
 def blabla():
     if 1==2:
         pass
     else:
-        verbose('Something strange here, but its ok', type='WARN')
+        verbose('Something strange here, but its ok', label='WARN')
 
 def blablabla():
     try:
         unexistent()
     except:
-        verbose('Unexistent  function called', type='ERROR')
+        verbose('Unexistent  function called', label='ERROR')
 
 def runsleep():
-    verbose('So tired. I\'ll get some sleep', type='INFO')
+    verbose('So tired. I\'ll get some sleep', label='INFO')
     time.sleep(1)
-    verbose('Wake up. What\'s time is it?', type='WARN')
+    verbose('Wake up. What\'s time is it?', label='WARN')
 
 bla()
 blabla()
-verbose('I\'m a -vv INFO text', level=2, type='INFO')
-verbose('I\'m a -vvv WARN text', level=3, type='WARN')
+verbose('I\'m a -vv INFO text', level=2, label='INFO')
+verbose('I\'m a -vvv WARN text', level=3, label='WARN')
 blablabla()
 runsleep()
 
