@@ -13,10 +13,10 @@ verbose('I\'m a -vvv WARN text', level=3, type='WARN')
 ```
 ![Screenshot from 2019-10-05 23-40-15](https://user-images.githubusercontent.com/3841825/66261712-5e1ed600-e7ca-11e9-9e44-9dbf32eea402.png)
 
-### Debug model (-d, --debug)
+##### Debug model (-d, --debug)
 Print PID, module and method called
 
-### Time measure ( -t, --timer)
+##### Time measure ( -t, --timer)
 Print time measure
 
 ![Screenshot from 2019-10-05 23-46-12](https://user-images.githubusercontent.com/3841825/66261713-5e1ed600-e7ca-11e9-86d4-228c19a5e909.png)
@@ -47,14 +47,8 @@ my_config3 = True
 ```
 ![Screenshot from 2019-10-05 23-10-47](https://user-images.githubusercontent.com/3841825/66261517-c23f9b00-e7c6-11e9-947c-d5bc395dcb5f.png)
 
-### install
-Import code inside your applications:
-```
-from pythontools import *
-```
 
 ## Miscellaneous
-
 ```
 import multiprocessing
 
@@ -63,4 +57,13 @@ from miscellaneous import pool_filter
 with multiprocessing.Pool(multiprocessing.cpu_count() * 2 + 1) as ppool:
     array = [{'key': 1, 'value': 4}, {'key': 2, 'value': 5}, {'key': 3, 'value': 6}, ]
     array = pool_filter(pool=ppool, func=lambda i: i['key'] >=2, candidates=array)
+```
+
+
+# INSTALL
+Import the functions directly:
+```
+from pythontools.argparse import *
+from pythontools.verbose import *
+from pythontools.miscellaneous import *
 ```
