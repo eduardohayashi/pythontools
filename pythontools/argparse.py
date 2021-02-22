@@ -54,11 +54,19 @@ try:
         for var in settings.__dir__():
             if not var.startswith("_"):
                 try:
-                    help = getattr(settings, f'__{var}')
+                    help = getattr(settings, f'_help_{var}')
                 except:
                     help = ''
-                parser.add_argument(f"--{var}", dest=var, help=help,
-                    default=getattr(settings, var))
+                try:
+                    single = getattr(settings, f'_single_{var}')
+                    parser.add_argument(f"-{single}", f"--{var}", dest=var, help=help,
+                        default=getattr(settings, var))
+                except:
+                    single = ''
+                    parser.add_argument(f"--{var}", dest=var, help=help,
+                        default=getattr(settings, var))
+
+
 except:
     pass
 
